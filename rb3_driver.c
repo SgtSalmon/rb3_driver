@@ -27,14 +27,14 @@
 #include <stdlib.h>
 #include <portmidi.h>
 
-#ifdef _POSIX_SOURCE
-    #include <unistd.h>
-#endif
+//#ifdef _POSIX_SOURCE
+#include <unistd.h>
+// #endif
 
-#ifdef _WIN32
-    #include <windows.h>
-    #define sleep(x) Sleep(1000*(x))
-#endif
+// #ifdef _WIN32
+    // #include <windows.h>
+    // #define sleep(x) Sleep(1000*(x))
+// #endif
 
 #include "myusb_atexit.h"
 #include "myusb_utils.h"
@@ -263,6 +263,7 @@ int main(int argc, char **argv) {
     r = libusb_detach_kernel_driver(h, interface_number);
     r = libusb_claim_interface(h, interface_number);
     if (r < 0) {
+        printf("%d\n%d", r);
         fprintf(stderr, "Failed to claim input device interface\n");
         SLEEP_IF_CHOOSEDEVICE();
         return r;
@@ -332,10 +333,10 @@ int main(int argc, char **argv) {
 
                     firstNote = DEFAULT_1STNOTE;
 
-                } else if (upOctPressed && firstNote <= 72) {
-                    firstNote += 24;
-                } else if (downOctPressed && firstNote >= 24) {
-                    firstNote -= 24;
+                } else if (upOctPressed && firstNote <= 84) {
+                    firstNote += 12;
+                } else if (downOctPressed && firstNote >= 12) {
+                    firstNote -= 12;
                 }
 
                 // N.B. assuming OCTAVE_OFFSET == PATCH_OFFSET (to save time)
