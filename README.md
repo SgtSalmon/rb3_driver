@@ -4,9 +4,7 @@ RB3 Wireless MIDI Keyboard Driver
 This is a user-mode "driver" for the Harmonix Rock Band 3 wireless MIDI
 keyboard ("keytar") in wireless mode.
 
-So far, it has only been tested with the Wii version of the keytar, although I
-see no reason in principle why most functionality should not work with the
-other versions.
+Only works with Wii version (as far as I know)
 
 Please see the bottom of this document for licensing and disclaimers.
 
@@ -34,21 +32,13 @@ interface of your choosing.
 
 To use the driver's output as input to another program, you need some way of
 patching the MIDI "Out" of this program to the MIDI "In" of the other program.
-On Windows, this can be done using MIDI Yoke (http://www.midiox.com).  On Linux
-or Mac OS X, you can probably use Jack (and I believe Jack 2 supports Windows
-as well).  However, so far I haven't tried it with anything apart from MIDI
-Yoke.
-
-If you do use MIDI Yoke (on Windows), bear in mind that you do *not* need to
-manually create a patch using MIDI-OX.  In fact, if you do this, it will not
-work properly.  [I found this out the hard way. :-)]  Simply use the MIDI Yoke
-"Out" and "In" devices with corresponding numbers, and it should work.
+On MacOS, use Audio-Midi setup to do this (see Setup section)
 
 
 Do I need to install it / is it complicated to use?
 ---------------------------------------------------
 
-No, it's just a normal program.  The simplest way to use it (on Windows) is
+No, it's just a normal program.  The simplest way to use it is
 just to expand the zip file to a folder, then double-click "rb3_driver" in the
 folder.  You will be presented with a numbered list of MIDI output devices.
 Just type the number of your chosen output device, and press the Enter key on
@@ -60,25 +50,13 @@ the normal way if you want to avoid cluttering up your screen.
 It should automatically detect the correct USB (input) device, provided that
 the keytar dongle is plugged in.
 
-Most systems will have at least one built-in MIDI output device that
-corresponds to your sound card's or operating system's built-in MIDI
-synthesizer.  However, this will usually be of low quality, and you will
-probably want to connect it to something else.  If you install MIDI Yoke on
-Windows, it provides a set of 8 virtual MIDI output devices that send all their
-data to the corresponding virtual MIDI input device (which has the same number
-but "In" instead of "Out").  This works exactly like a digital patch cable.
-You can set up your synthesizer or sequencer program to use this as its input.
-
-
 What are the dependencies / how do I compile it?
 ------------------------------------------------
 
-If you are using Windows, the good news is that you don't have to compile it
-yourself.  A ready-compiled version of the program (with dependencies included)
-is available from https://github.com/martinjos/rb3_driver/releases
+The good news is that you (Hopefully) don't have to compile it
+yourself.  A ready-compiled version of the program should work if you download as zip (tested on Sonoma)
 
-So far, I have only compiled it under MinGW32/MSYS.  However, it should in
-principle work just as well on Linux or even (possibly) Mac OS X.
+So far, I have only compiled it under MacOS's default make in Terminal.   
 
 The main dependencies are libusb (http://libusb.org/) and PortMidi
 (http://portmedia.sourceforge.net/portmidi/).
@@ -110,11 +88,15 @@ format.
 
 LED output is so far not implemented.
 
+Setup (MacOS)
+------------
+Using Audio-MIDI setup, enable the default driver, click plus to add a dummy device. Then, launch the driver. 
+An output should show up (if Logic is open, select the Logic output). 
 
 License
 -------
 
-Copyright (c) 2015 Martin Sidaway
+Copyright (c) 2024
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
